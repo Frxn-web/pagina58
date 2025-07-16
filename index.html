@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚽ FutbolLatino Pro - Noticias Deportivas en Vivo</title>
+    <meta name="description" content="Las mejores noticias de fútbol, transferencias, resultados en vivo de Argentina, Brasil, México, Colombia y toda Latinoamérica. ¡No te pierdas nada!">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header con espacio para banner 728x90 */
+        .header {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .banner-top {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+        }
+
+        .banner-placeholder {
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 35px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 728px;
+            margin: 0 auto;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .read-more {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        /* Banner 300x250 en sidebar */
+        .banner-sidebar {
+            text-align: center;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 125px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Native Ad Spaces */
+        .native-ad {
+            background: #f8f9fa;
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Social Bar (fixed bottom) */
+        .social-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+        }
+
+        .social-bar-placeholder {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        /* Trending Section */
+        .trending-list {
+            list-style: none;
+        }
+
+        .trending-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trending-number {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .banner-placeholder {
+                padding: 25px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .social-bar {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Engagement Elements */
+        .live-indicator {
+            background: #ff4757;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+
+        .country-flag {
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+
+        /* Interactive Engagement Elements */
+        .engagement-section {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .poll-widget h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .poll-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .poll-btn:hover {
+            background: white;
+            color: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .poll-cta {
+            font-style: italic;
+            opacity: 0.9;
+            animation: pulse 2s infinite;
+        }
+
+        /* Content Gate */
+        .content-gate {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .locked-content h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            background: linear-gradient(45deg, #333, #555);
+            height: 200px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .play-btn {
+            font-size: 4rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+        }
+
+        .unlock-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Top Banner Space -->
+    <header class="header">
+        <div class="banner-top">
+            <div class="banner-placeholder">
+                📢 ESPACIO BANNER 728x90 - ADSTERRA DISPLAY AD
+            </div>
+        </div>
+        <nav class="nav-container">
+            <div class="logo">⚽ FutbolLatino Pro</div>
+            <ul class="nav-menu">
+                <li><a href="#noticias">Noticias</a></li>
+                <li><a href="#transferencias">Transferencias</a></li>
+                <li><a href="#resultados">Resultados</a></li>
+                <li><a href="#en-vivo">En Vivo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="hero-section">
+                <h1 class="hero-title">🔥 Lo Último en Fútbol Latino</h1>
+                <p class="hero-subtitle">Noticias, transferencias y resultados en tiempo real</p>
+            </section>
+
+            <!-- Interactive Engagement Section -->
+            <div class="engagement-section">
+                <div class="poll-widget">
+                    <h3>🔥 VOTA: ¿Quién es el mejor delantero de Latinoamérica?</h3>
+                    <div class="poll-options">
+                        <button class="poll-btn" onclick="triggerEngagement('messi')">🇦🇷 Messi (45%)</button>
+                        <button class="poll-btn" onclick="triggerEngagement('suarez')">🇺🇾 Suárez (30%)</button>
+                        <button class="poll-btn" onclick="triggerEngagement('falcao')">🇨🇴 Falcao (25%)</button>
+                    </div>
+                    <p class="poll-cta">👆 VOTA para ver estadísticas completas</p>
+                </div>
+            </div>
+
+            <!-- Content Gate -->
+            <div class="content-gate">
+                <div class="locked-content">
+                    <h3>🎥 VIDEO EXCLUSIVO: Jugada polémica del partido</h3>
+                    <div class="video-thumbnail">
+                        <div class="play-btn" onclick="unlockContent()">▶️</div>
+                        <div class="lock-overlay">🔒</div>
+                    </div>
+                    <button class="unlock-btn" onclick="unlockContent()">VER VIDEO GRATIS</button>
+                </div>
+            </div>
+
+            <!-- Native Ad Space -->
+            <div class="native-ad">
+                📱 ESPACIO NATIVE AD - INTEGRADO CON CONTENIDO
+            </div>
+
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image">⚽</div>
+                    <div class="news-content">
+                        <h2 class="news-title"><span class="country-flag">🇧🇷</span>Flamengo vs Palmeiras: El Clásico que Paraliza Brasil</h2>
+                        <p class="news-excerpt">El encuentro más esperado del fútbol brasileño promete emociones fuertes. Análisis, alineaciones y predicciones del partido...</p>
+                        <div class="news-meta">
+                            <span class="live-indicator">🔴 EN VIVO</span>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">🏆</div>
+                    <div class="news-content">
+                        <h2 class="news-title"><span class="country-flag">🇦🇷</span>Messi Sorprende: Nueva Declaración Sobre su Futuro</h2>
+                        <p class="news-excerpt">El capitán argentino habla sobre sus planes después del Mundial. Sus palabras generan revuelo en el mundo del fútbol...</p>
+                        <div class="news-meta">
+                            <span>⏰ Hace 2 horas</span>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">💰</div>
+                    <div class="news-content">
+                        <h2 class="news-title"><span class="country-flag">🇲🇽</span>Transferencia Bomba: Chucky Lozano al Real Madrid</h2>
+                        <p class="news-excerpt">Según fuentes cercanas, el delantero mexicano estaría muy cerca de fichar por el conjunto merengue. Los detalles...</p>
+                        <div class="news-meta">
+                            <span>⏰ Hace 4 horas</span>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">🥅</div>
+                    <div class="news-content">
+                        <h2 class="news-title"><span class="country-flag">🇨🇴</span>James Rodríguez: Golazo Espectacular en la Copa</h2>
+                        <p class="news-excerpt">El mediocampista colombiano marca un gol antológico que ya es viral en redes sociales. Revive la jugada completa...</p>
+                        <div class="news-meta">
+                            <span>⏰ Hace 6 horas</span>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">📱</div>
+                    <div class="news-content">
+                        <h2 class="news-title"><span class="country-flag">🇺🇾</span>Cavani Anuncia su Retiro: "Ha Llegado el Momento"</h2>
+                        <p class="news-excerpt">El delantero uruguayo sorprende al mundo con su decisión. Una carrera llena de éxitos llega a su fin...</p>
+                        <div class="news-meta">
+                            <span>⏰ Hace 8 horas</span>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">🎯</div>
+                    <div class="news-content">
+                        <h2 class="news-title"><span class="country-flag">🇵🇪</span>Selección Peruana: Convocatoria Sorpresa para las Eliminatorias</h2>
+                        <p class="news-excerpt">El técnico peruano incluye jóvenes promesas en la lista. Conoce a los nuevos talentos que buscan un lugar...</p>
+                        <div class="news-meta">
+                            <span>⏰ Hace 10 horas</span>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Native Ad Space -->
+            <div class="native-ad">
+                🎮 ESPACIO NATIVE AD - GAMING/APPS MÓVILES
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Banner 300x250 -->
+            <div class="sidebar-widget">
+                <div class="banner-sidebar">
+                    📱 BANNER 300x250<br>ADSTERRA AD SPACE
+                </div>
+            </div>
+
+            <!-- Trending Topics -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">🔥 Trending Ahora</h3>
+                <ul class="trending-list">
+                    <li class="trending-item">
+                        <span class="trending-number">1</span>
+                        <span>Messi vs Cristiano: ¿Quién es mejor?</span>
+                    </li>
+                    <li class="trending-item">
+                        <span class="trending-number">2</span>
+                        <span>Eliminatorias Sudamericanas 2025</span>
+                    </li>
+                    <li class="trending-item">
+                        <span class="trending-number">3</span>
+                        <span>Copa América: Sedes confirmadas</span>
+                    </li>
+                    <li class="trending-item">
+                        <span class="trending-number">4</span>
+                        <span>Mercado de fichajes invierno</span>
+                    </li>
+                    <li class="trending-item">
+                        <span class="trending-number">5</span>
+                        <span>Mundial 2026: Todo lo que sabemos</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Native Ad Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">📱 Recomendado</h3>
+                <div class="native-ad">
+                    NATIVE AD WIDGET<br>
+                    VPN/UTILITY APPS
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">⚡ Stats Rápidas</h3>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="margin-bottom: 15px;">
+                        <strong>🇧🇷 Brasil</strong><br>
+                        Brasileirão: Flamengo líder
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>🇦🇷 Argentina</strong><br>
+                        Liga Profesional: Boca 2° lugar
+                    </div>
+                    <div>
+                        <strong>🇲🇽 México</strong><br>
+                        Liga MX: América domina
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Social Bar (Fixed Bottom) -->
+    <div class="social-bar">
+        <div class="social-bar-placeholder">
+            📱 SOCIAL BAR - ADSTERRA AD FORMAT (Mobile Optimized)
+        </div>
+    </div>
+
+    <!-- Popunder Code Placeholder -->
+    <script>
+        // AQUÍ VA EL CÓDIGO DE POPUNDER DE ADSTERRA
+        console.log("🚀 Popunder Adsterra Code Here");
+        
+        // Engagement tracking and ad triggering
+        let userEngagementScore = 0;
+        let popunderTriggered = false;
+
+        // Function to trigger engagement actions
+        function triggerEngagement(action) {
+            userEngagementScore++;
+            console.log(`🎯 User engagement: ${action} (Score: ${userEngagementScore})`);
+            
+            // Trigger popunder after first engagement
+            if (!popunderTriggered && userEngagementScore >= 1) {
+                triggerPopunder();
+                popunderTriggered = true;
+            }
+            
+            // Update poll visual feedback
+            document.querySelectorAll('.poll-btn').forEach(btn => {
+                btn.style.background = 'rgba(255,255,255,0.3)';
+            });
+            event.target.style.background = 'white';
+            event.target.style.color = '#ff6b6b';
+            
+            // Show "results" (fake interaction to increase engagement)
+            setTimeout(() => {
+                alert('🎉 ¡Gracias por votar! Ver más estadísticas en la sección de resultados.');
+            }, 500);
+        }
+
+        // Content unlock function
+        function unlockContent() {
+            userEngagementScore++;
+            console.log(`🔓 Content unlocked (Score: ${userEngagementScore})`);
+            
+            // Trigger popunder
+            if (!popunderTriggered) {
+                triggerPopunder();
+                popunderTriggered = true;
+            }
+            
+            // Simulate content unlock
+            const contentGate = document.querySelector('.content-gate');
+            contentGate.innerHTML = `
+                <h3>✅ ¡Contenido Desbloqueado!</h3>
+                <div style="background: #28a745; color: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                    🎥 Video cargando... <br>
+                    <small>Mientras tanto, revisa nuestras recomendaciones abajo 👇</small>
+                </div>
+                <div class="native-ad">
+                    📱 NATIVE AD: Apps deportivas recomendadas
+                </div>
+            `;
+        }
+
+        // Popunder trigger function
+        function triggerPopunder() {
+            console.log('🚀 POPUNDER TRIGGERED - Adsterra Revenue Event');
+            // AQUÍ va el código real de Adsterra popunder
+            // Ejemplo: AdsterraCodes.popunder();
+        }
+
+        // Track scroll depth for better CPM
+        let maxScroll = 0;
+        function trackScrollDepth() {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                if (maxScroll > 50) {
+                    userEngagementScore += 0.5;
+                    console.log(`📊 Scroll depth: ${maxScroll}% (Engagement +0.5)`);
+                }
+            }
+        }
+
+        // Time on page tracking
+        let timeOnPage = 0;
+        setInterval(() => {
+            timeOnPage++;
+            if (timeOnPage % 30 === 0) { // Every 30 seconds
+                userEngagementScore += 0.2;
+                console.log(`⏱️ Time on page: ${timeOnPage}s (Engagement +0.2)`);
+            }
+        }, 1000);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track scroll for engagement
+            window.addEventListener('scroll', trackScrollDepth);
+            
+            // Efecto click en cards (triggers popunder)
+            const newsCards = document.querySelectorAll('.news-card');
+            newsCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    userEngagementScore++;
+                    console.log('📰 News card clicked - High engagement action');
+                    
+                    if (!popunderTriggered && userEngagementScore >= 2) {
+                        triggerPopunder();
+                        popunderTriggered = true;
+                    }
+                });
+            });
+
+            // Track clicks on "Read more" buttons
+            const readMoreBtns = document.querySelectorAll('.read-more');
+            readMoreBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    userEngagementScore += 2; // High value action
+                    console.log('🔗 Read more clicked - Premium engagement');
+                    
+                    if (!popunderTriggered) {
+                        triggerPopunder();
+                        popunderTriggered = true;
+                    }
+                    
+                    // Simulate article loading
+                    this.textContent = 'Cargando...';
+                    setTimeout(() => {
+                        this.textContent = 'Leer más';
+                        alert('📖 Artículo completo disponible en la app móvil. ¡Descárgala gratis!');
+                    }, 1000);
+                });
+            });
+
+            // Simular actualizaciones en vivo
+            setInterval(() => {
+                const liveIndicators = document.querySelectorAll('.live-indicator');
+                liveIndicators.forEach(indicator => {
+                    indicator.style.opacity = indicator.style.opacity === '0.5' ? '1' : '0.5';
+                });
+            }, 1000);
+
+            // Auto-generate "breaking news" notifications
+            setTimeout(() => {
+                showBreakingNews();
+            }, 15000); // After 15 seconds
+        });
+
+        // Breaking news popup (increases engagement)
+        function showBreakingNews() {
+            const breakingNews = document.createElement('div');
+            breakingNews.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(45deg, #ff4757, #ff6b6b);
+                color: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                z-index: 9999;
+                cursor: pointer;
+                animation: slideIn 0.5s ease;
+                max-width: 300px;
+            `;
+            breakingNews.innerHTML = `
+                <div style="font-weight: bold; margin-bottom: 5px;">🚨 NOTICIA DE ÚLTIMO MOMENTO</div>
+                <div style="font-size: 0.9rem;">Fichaje bomba confirmado. Haz clic para más detalles.</div>
+            `;
+            
+            breakingNews.onclick = function() {
+                userEngagementScore += 3; // Very high value
+                console.log('🚨 Breaking news clicked - Maximum engagement');
+                triggerPopunder();
+                this.remove();
+                alert('🔥 ¡Noticia exclusiva! Suscríbete para recibir todas las actualizaciones.');
+            };
+            
+            document.body.appendChild(breakingNews);
+            
+            // Auto remove after 10 seconds
+            setTimeout(() => {
+                if (breakingNews.parentNode) {
+                    breakingNews.remove();
+                }
+            }, 10000);
+        }
+
+        // Analytics tracking simulation
+        function trackPageView() {
+            console.log('📈 Page view tracked - Adsterra impression');
+        }
+
+        function trackUserEngagement(action) {
+            console.log(`🎯 User engagement: ${action}`);
+        }
+
+        // Simular métricas para Adsterra
+        setTimeout(() => {
+            trackPageView();
+        }, 1000);
+
+        // CSS Animation for breaking news
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
