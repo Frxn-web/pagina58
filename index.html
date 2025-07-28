@@ -34,10 +34,13 @@
 
         .banner-top {
             text-align: center;
-            padding: 10px;
+            padding: 15px;
             background: rgba(255,255,255,0.1);
             margin-bottom: 10px;
-            min-height: 90px; /* Reserve space for the ad */
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-container {
@@ -211,22 +214,22 @@
             padding-bottom: 8px;
         }
 
-        /* Banner 300x250 en sidebar */
-        .banner-sidebar {
+        /* Banner spaces */
+        .banner-sidebar, .banner-content {
             text-align: center;
-            min-height: 250px; /* Reserve space for the ad */
+            padding: 20px;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Native Ad Spaces */
-        .native-ad {
-            background: #f8f9fa;
-            border: 1px dashed #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            color: #666;
-            font-style: italic;
+        .banner-content {
+            margin: 30px 0;
+            min-height: 200px;
         }
 
         /* Social Bar (fixed bottom) */
@@ -237,11 +240,11 @@
             right: 0;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
             z-index: 1000;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-            min-height: 50px; /* Reserve space for social bar ad */
+            min-height: 80px;
         }
         
         .social-bar-content {
@@ -277,6 +280,15 @@
             font-size: 0.8rem;
         }
 
+        /* Ad Container Styles */
+        .ad-container {
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            text-align: center;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -298,7 +310,11 @@
             }
             
             .social-bar {
-                padding: 5px;
+                padding: 10px;
+            }
+
+            .banner-top {
+                min-height: 100px;
             }
         }
 
@@ -323,25 +339,19 @@
             margin-right: 5px;
             font-size: 1.2rem;
         }
+
+        /* Body padding for fixed social bar */
+        body {
+            padding-bottom: 100px;
+        }
     </style>
-    <!-- General Ad Script -->
-    <script type='text/javascript' src='//pl27179982.profitableratecpm.com/13/31/c7/1331c78c884f45fe1603a4e299f024a9.js'></script>
 </head>
 <body>
     <!-- Header with Top Banner Space -->
     <header class="header">
         <div class="banner-top">
-            <!-- Ad Script 728x90 -->
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'f668b394ddb38f22a78d16ebeba5adfc',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/f668b394ddb38f22a78d16ebeba5adfc/invoke.js"></script>
+            <!-- Tu nuevo script de publicidad en el header -->
+            <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
         </div>
         <nav class="nav-container">
             <div class="logo">⚽ FutbolLatino Pro</div>
@@ -363,10 +373,9 @@
                 <p class="hero-subtitle">Noticias, transferencias y resultados en tiempo real</p>
             </section>
 
-            <!-- In-Page Push Ad Space -->
-            <div class="native-ad">
-                <script async="async" data-cfasync="false" src="//pl27180210.profitableratecpm.com/890b0dcf872f61ee48fef5c2d3eda2d4/invoke.js"></script>
-                <div id="container-890b0dcf872f61ee48fef5c2d3eda2d4"></div>
+            <!-- Anuncio después del hero -->
+            <div class="banner-content">
+                <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
             </div>
 
             <div class="news-grid">
@@ -396,6 +405,11 @@
                     </div>
                 </article>
 
+                <!-- Anuncio entre noticias -->
+                <div class="ad-container">
+                    <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
+                </div>
+
                 <!-- News Card 3 -->
                 <article class="news-card">
                     <div class="news-image">💰</div>
@@ -422,24 +436,19 @@
                     </div>
                 </article>
             </div>
+
+            <!-- Anuncio al final del contenido principal -->
+            <div class="banner-content">
+                <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
+            </div>
         </main>
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <!-- Banner 300x250 -->
+            <!-- Banner en sidebar -->
             <div class="sidebar-widget">
                 <div class="banner-sidebar">
-                    <!-- Ad Script 300x250 -->
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '4c984771afcd2f57631da3e4ebe248d5',
-                            'format' : 'iframe',
-                            'height' : 250,
-                            'width' : 300,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/4c984771afcd2f57631da3e4ebe248d5/invoke.js"></script>
+                    <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
                 </div>
             </div>
 
@@ -453,6 +462,13 @@
                     <li class="trending-item"><span class="trending-number">4</span><span>Mercado de fichajes invierno</span></li>
                     <li class="trending-item"><span class="trending-number">5</span><span>Mundial 2026: Todo lo que sabemos</span></li>
                 </ul>
+            </div>
+
+            <!-- Otro anuncio en sidebar -->
+            <div class="sidebar-widget">
+                <div class="banner-sidebar">
+                    <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
+                </div>
             </div>
 
             <!-- Quick Stats -->
@@ -479,8 +495,8 @@
     <!-- Social Bar (Fixed Bottom) -->
     <div class="social-bar">
         <div class="social-bar-content">
-            <!-- Social Bar Ad Script -->
-            <script type='text/javascript' src='//pl27184984.profitableratecpm.com/77/1e/ab/771eab0be6770032b2646abdc04d3c42.js'></script>
+            <!-- Tu script en la barra social -->
+            <script src="https://fpyf8.com/88/tag.min.js" data-zone="159951" async data-cfasync="false"></script>
         </div>
     </div>
 
